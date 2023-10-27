@@ -1,6 +1,7 @@
 package jw.com.br.EasyAgro.controllers;
 
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jw.com.br.EasyAgro.domain.product.Product;
 import jw.com.br.EasyAgro.dtos.ProductDTO;
 import jw.com.br.EasyAgro.services.ProductService;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
+@SecurityRequirement(name = "bearer-key")
 public class ProductController {
     @Autowired
     private ProductService productService;

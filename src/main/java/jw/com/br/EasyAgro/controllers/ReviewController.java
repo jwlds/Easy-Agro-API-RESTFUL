@@ -1,6 +1,7 @@
 package jw.com.br.EasyAgro.controllers;
 
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jw.com.br.EasyAgro.domain.review.Review;
 import jw.com.br.EasyAgro.dtos.ReviewDTO;
 import jw.com.br.EasyAgro.services.ReviewService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/reviews")
+@SecurityRequirement(name = "bearer-key")
 public class ReviewController {
     @Autowired
     private ReviewService reviewService;
