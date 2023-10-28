@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 public class User implements UserDetails {
     @Id
-    private ObjectId id;
+    private String id;
     private String login;
     private String password;
     private String phoneNumber;

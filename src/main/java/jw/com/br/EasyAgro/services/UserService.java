@@ -4,6 +4,7 @@ import jw.com.br.EasyAgro.dtos.UserDTO;
 import jw.com.br.EasyAgro.repositories.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     public List<User> allUsers(){
         return userRepository.findAll();
     }
@@ -27,7 +31,10 @@ public class UserService {
 
     public void deleteAllProducts() { userRepository.deleteAll(); }
     public User createUser(UserDTO user){
-        return userRepository.insert(new User(user));
+        String encodedPassword = passwordEncoder.encode(user.password());
+        User newUser = new User(user);
+        newUser.setPassword(encodedPassword);
+        return userRepository.insert(newUser);
     }
 
 
