@@ -16,7 +16,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
-@SecurityRequirement(name = "bearer-key")
 public class ProductController {
     @Autowired
     private ProductService productService;
