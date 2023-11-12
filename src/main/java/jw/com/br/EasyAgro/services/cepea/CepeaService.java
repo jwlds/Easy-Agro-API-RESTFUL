@@ -1,5 +1,6 @@
 package jw.com.br.EasyAgro.services.cepea;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jw.com.br.EasyAgro.domain.product.Product;
 import jw.com.br.EasyAgro.domain.productCepea.ProductCepea;
 import jw.com.br.EasyAgro.dtos.cepeaapi.CepeaApiResponse;
 import jw.com.br.EasyAgro.dtos.cepeaapi.ProductCepeaDTO;
@@ -12,8 +13,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.*;
+
+import javax.swing.text.Document;
 import java.io.IOException;
 import java.util.List;
 
@@ -53,7 +57,6 @@ public class CepeaService {
             return null;
         }
     }
-
     public void saveDataToMongoDB() {
         List<ProductCepeaDTO> productList = fetchDataProducts();
 
@@ -69,4 +72,11 @@ public class CepeaService {
         cepeaApiRepository.deleteAll();
         saveDataToMongoDB();
     }
+
+    public List<ProductCepea> allProducts(){
+        return cepeaApiRepository.findAll();
+    }
+
+
+
 }

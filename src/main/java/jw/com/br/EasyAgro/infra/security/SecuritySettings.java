@@ -30,6 +30,7 @@ public class SecuritySettings {
                     req.requestMatchers( "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/user").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/api/products/**").permitAll();
+                    //req.requestMatchers(HttpMethod.POST, "/api/products/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/api/address/**").permitAll();
                     req.requestMatchers(HttpMethod.DELETE, "/user/deleteAll").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/user/create").permitAll();

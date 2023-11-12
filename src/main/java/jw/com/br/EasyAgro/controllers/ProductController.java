@@ -46,6 +46,7 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
+    @SecurityRequirement(name = "bearer-key")
     @PostMapping("/create")
     public ResponseEntity<Product> createProduct(@RequestBody @Valid ProductDTO payload) {
         return new ResponseEntity<Product>(productService.createProduct(payload), HttpStatus.OK);
