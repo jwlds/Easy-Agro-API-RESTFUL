@@ -33,6 +33,8 @@ public class SecuritySettings {
                     req.requestMatchers(HttpMethod.PUT, "/user/**").permitAll();
                     req.requestMatchers(HttpMethod.PATCH, "/user/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/api/products/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/api/culture/**").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/api/culture/**").permitAll();
                     //req.requestMatchers(HttpMethod.POST, "/api/products/**").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/api/address/**").permitAll();
                     req.requestMatchers(HttpMethod.DELETE, "/user/**").permitAll();
