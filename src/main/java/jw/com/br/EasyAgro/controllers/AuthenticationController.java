@@ -28,8 +28,9 @@ public class AuthenticationController {
     ResponseEntity singIn(@RequestBody @Valid AuthenticationDTO credential){
         var tokenAuthentication = new UsernamePasswordAuthenticationToken(credential.login(),credential.password());
         var authentication = authenticationManager.authenticate(tokenAuthentication);
-        var tokenJWT = tokenService.generateToken((User) authentication.getPrincipal());
-        return ResponseEntity.ok(new JWTokenDTO(tokenJWT));
+        var user = (User) authentication.getPrincipal();
+        var tokenJWT = tokenService.generateToken(user);
+        return ResponseEntity.ok(new JWTokenDTO(tokenJWT,user.getId()));
     }
 
 }

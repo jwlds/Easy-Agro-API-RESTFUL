@@ -23,6 +23,7 @@ import java.util.List;
 public class  Product {
     @Id
     private String id;
+    private String userId;
     private String name;
     private BigDecimal price;
     private String category;
@@ -45,6 +46,7 @@ public class  Product {
         this.images = payload.images();
         this.createdAt = createdAt;
         this.reviewIds = reviewIds;
+        this.userId = payload.userId();
     }
 
 

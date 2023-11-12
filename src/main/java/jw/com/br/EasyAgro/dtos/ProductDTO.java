@@ -8,6 +8,7 @@ import java.util.List;
 public record ProductDTO(
          @NotBlank
          String name,
+         String userId,
 
          BigDecimal price,
 
