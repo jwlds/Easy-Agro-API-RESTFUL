@@ -125,13 +125,13 @@ public class UserController {
         return userService.isProductInFavorites(userId,productId);
     }
 
-    @DeleteMapping("/cart/clear/{userId}")
+    @DeleteMapping("/cart/clean/{userId}")
     public ResponseEntity<String> clearCart(@PathVariable String userId) {
         userService.clearCart(userId);
         return ResponseEntity.ok("Carrinho limpo com sucesso.");
     }
 
-    @DeleteMapping("/myFavorites/clear/{userId}")
+    @DeleteMapping("/myFavorites/clean/{userId}")
     public ResponseEntity<String> clearMyFavorites(@PathVariable String userId) {
         userService.clearMyFavorites(userId);
         return ResponseEntity.ok("Favoritos limpo com sucesso.");
