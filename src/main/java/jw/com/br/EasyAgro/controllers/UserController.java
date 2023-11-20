@@ -131,6 +131,18 @@ public class UserController {
         return ResponseEntity.ok("Carrinho limpo com sucesso.");
     }
 
+    @DeleteMapping("/myFavorites/clear/{userId}")
+    public ResponseEntity<String> clearMyFavorites(@PathVariable String userId) {
+        userService.clearMyFavorites(userId);
+        return ResponseEntity.ok("Favoritos limpo com sucesso.");
+    }
+
+    @DeleteMapping("/myFavorites/user/{userId}/remove/{productId}")
+    public ResponseEntity<String> removeFavorite(@PathVariable String userId,@PathVariable String productId) {
+        userService.removeFromMyFavorites(userId,productId);
+        return ResponseEntity.ok("Favoritos limpo com sucesso.");
+    }
+
 
 
 

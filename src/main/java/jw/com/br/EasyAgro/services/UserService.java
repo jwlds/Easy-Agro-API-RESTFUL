@@ -181,6 +181,25 @@ public class UserService {
         mongoTemplate.updateFirst(query, update, User.class);
     }
 
+    public void clearMyFavorites(String userId) {
+        ObjectId objectId = new ObjectId(userId);
+
+        Query query = new Query(Criteria.where("_id").is(objectId));
+        Update update = new Update().unset("myFavorites");
+
+        mongoTemplate.updateFirst(query, update, User.class);
+    }
+
+    public void removeFromMyFavorites(String userId, String productId) {
+        ObjectId objectId = new ObjectId(userId);
+
+        Query query = new Query(Criteria.where("_id").is(objectId));
+        Update update = new Update().pull("myFavorites", new Favorites(productId));
+
+        mongoTemplate.updateFirst(query, update, User.class);
+    }
+
+
 
     public FavoriteResponseDTO isProductInFavorites(String userId, String productId) {
         ObjectId objectId = new ObjectId(userId);
