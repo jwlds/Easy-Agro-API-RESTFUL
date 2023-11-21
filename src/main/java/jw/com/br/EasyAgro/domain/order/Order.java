@@ -18,16 +18,18 @@ import java.util.List;
 public class Order {
     @Id
     private String id;
+    private String transitionId;
     private String buyerId;
     private BigDecimal totalPrice;
     private Instant createdAt;
     private String status;
     private List<OrderProduct> products;
 
-    public Order(BigDecimal totalPrice,String status,List<OrderProduct> products){
+    public Order(BigDecimal totalPrice,String status,List<OrderProduct> products, String transitionId){
         this.products = products;
         this.totalPrice = totalPrice;
         this.status = status;
+        this.transitionId = transitionId;
         this.createdAt = Instant.now();
     }
 }
