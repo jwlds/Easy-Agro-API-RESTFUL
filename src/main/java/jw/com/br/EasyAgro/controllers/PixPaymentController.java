@@ -1,6 +1,7 @@
 package jw.com.br.EasyAgro.controllers;
 
 import jakarta.validation.Valid;
+import jw.com.br.EasyAgro.dtos.OrderDTO;
 import jw.com.br.EasyAgro.dtos.mercadopago.PixPaymentDTO;
 import jw.com.br.EasyAgro.dtos.mercadopago.PixPaymentResponseDTO;
 import jw.com.br.EasyAgro.services.PixPaymentService;
