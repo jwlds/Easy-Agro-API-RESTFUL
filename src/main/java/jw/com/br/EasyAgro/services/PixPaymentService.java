@@ -12,14 +12,11 @@ import com.mercadopago.resources.payment.Payment;
 import jw.com.br.EasyAgro.domain.order.Order;
 import jw.com.br.EasyAgro.domain.order.OrderProduct;
 import jw.com.br.EasyAgro.domain.user.User;
-import jw.com.br.EasyAgro.dtos.OrderDTO;
 import jw.com.br.EasyAgro.dtos.mercadopago.PixPaymentDTO;
 import jw.com.br.EasyAgro.dtos.mercadopago.PixPaymentResponseDTO;
 import jw.com.br.EasyAgro.exception.MercadoPagoException;
 import jw.com.br.EasyAgro.repositories.OrderRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -27,6 +24,8 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PixPaymentService {
@@ -38,6 +37,8 @@ public class PixPaymentService {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
+
 
     public PixPaymentResponseDTO processPayment(PixPaymentDTO pixPaymentDTO) {
         try {
@@ -74,7 +75,8 @@ public class PixPaymentService {
                     pixPaymentDTO.getTransactionAmount(),
                     createdPayment.getStatus(),
                     pixPaymentDTO.getOrders(),
-                    String.valueOf(createdPayment.getId()));
+                    String.valueOf(createdPayment.getId()),
+                    pixPaymentDTO.getBuyerId());
             orderRepository.insert(order);
 
             return new PixPaymentResponseDTO(
@@ -116,5 +118,18 @@ public class PixPaymentService {
             throw new MercadoPagoException(exception.getMessage());
         }
     }
+    public List<Order> myOrders(String id) {
+        return orderRepository.findByBuyerId(id);
+    }
+
+    public List<OrderProduct> mySellerProducts(String sellerId) {
+        List<Order> orders = orderRepository.findAll();
+
+        return orders.stream()
+                .flatMap(order -> order.getProducts().stream())
+                .filter(product -> product.getSellerId().equals(sellerId))
+                .collect(Collectors.toList());
+    }
+
 
 }

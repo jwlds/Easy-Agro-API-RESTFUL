@@ -25,12 +25,13 @@ public class Order {
     private String status;
     private List<OrderProduct> products;
 
-    public Order(BigDecimal totalPrice,String status,List<OrderProduct> products, String transitionId){
+    public Order(BigDecimal totalPrice,String status,List<OrderProduct> products, String transitionId, String userId){
         this.products = products;
         this.totalPrice = totalPrice;
         this.status = status;
         this.transitionId = transitionId;
         this.createdAt = Instant.now();
+        this.buyerId = userId;
     }
 }
 

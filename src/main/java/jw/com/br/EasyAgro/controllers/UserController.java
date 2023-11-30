@@ -1,5 +1,7 @@
 package jw.com.br.EasyAgro.controllers;
 
+import jw.com.br.EasyAgro.domain.order.Order;
+import jw.com.br.EasyAgro.domain.order.OrderProduct;
 import jw.com.br.EasyAgro.domain.product.Product;
 import jw.com.br.EasyAgro.domain.user.User;
 import jw.com.br.EasyAgro.domain.user.my.Cart;
@@ -10,6 +12,8 @@ import jw.com.br.EasyAgro.dtos.FavoriteResponseDTO;
 import jw.com.br.EasyAgro.dtos.ItemUserDTO;
 import jw.com.br.EasyAgro.dtos.UserDTO;
 import jw.com.br.EasyAgro.dtos.UserUpdateDTO;
+import jw.com.br.EasyAgro.repositories.OrderRepository;
+import jw.com.br.EasyAgro.services.PixPaymentService;
 import jw.com.br.EasyAgro.services.TaskService;
 import jw.com.br.EasyAgro.services.UserService;
 import jakarta.validation.Valid;
@@ -17,6 +21,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.PortResolverImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.desktop.OpenFilesEvent;
@@ -31,6 +36,10 @@ public class UserController {
 
     @Autowired
     private TaskService taskService;
+
+
+    @Autowired
+    private PixPaymentService pixPaymentService;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllProducts(){
@@ -142,6 +151,18 @@ public class UserController {
         userService.removeFromMyFavorites(userId,productId);
         return ResponseEntity.ok("Favoritos limpo com sucesso.");
     }
+
+    @GetMapping("/myOrders/{id}")
+    public List<Order> getMyOrdersById(@PathVariable String id) {
+        return pixPaymentService.myOrders(id);
+    }
+
+    @GetMapping("/mySellerProducts/{sellerId}")
+    public List<OrderProduct> getSellerProducts(@PathVariable String sellerId) {
+        return pixPaymentService.mySellerProducts(sellerId);
+    }
+
+
 
 
 

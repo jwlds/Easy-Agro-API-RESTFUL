@@ -20,12 +20,13 @@ public class PixPaymentDTO {
     @NotNull
     private BigDecimal transactionAmount;
 
-    @NotNull
     @JsonProperty("description")
     private String productDescription;
 
     @NotNull
     private PayerDTO payer;
+
+    private String buyerId;
 
     private List<OrderProduct> orders;
 
