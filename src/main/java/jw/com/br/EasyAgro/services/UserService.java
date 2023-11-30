@@ -8,6 +8,7 @@ import jw.com.br.EasyAgro.domain.user.my.Task;
 import jw.com.br.EasyAgro.dtos.*;
 import jw.com.br.EasyAgro.repositories.ProductRepository;
 import jw.com.br.EasyAgro.repositories.UserRepository;
+import jw.com.br.EasyAgro.serversocket.Cliente;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -20,6 +21,7 @@ import org.springframework.data.mongodb.core.query.Update;
 
 import org.springframework.data.mongodb.core.query.Query;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +46,10 @@ public class UserService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+
+    @Autowired
+    private Cliente clienteService;
+
     public List<User> allUsers() {
         return userRepository.findAll();
     }
@@ -62,7 +68,7 @@ public class UserService {
         userRepository.deleteAll();
     }
 
-    public User createUser(UserDTO user) {
+    public User createUser(UserDTO user)  {
         String encodedPassword = passwordEncoder.encode(user.password());
         User newUser = new User(user);
         newUser.setPassword(encodedPassword);

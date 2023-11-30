@@ -10,5 +10,5 @@ public record UserDTO(
          String login,
          String password,
          String phoneNumber,
-         int cpf) {
+         String cpf) {
 }

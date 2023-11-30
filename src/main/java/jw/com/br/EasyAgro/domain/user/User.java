@@ -31,7 +31,7 @@ public class User implements UserDetails {
     private List<Favorites> myFavorites;
     private List<Task> myTask;
     private String nickname;
-    private int cpf;
+    private String cpf;
     private String password;
     private String phoneNumber;
     private String name;

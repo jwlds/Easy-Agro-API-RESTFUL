@@ -13,6 +13,7 @@ import jw.com.br.EasyAgro.dtos.ItemUserDTO;
 import jw.com.br.EasyAgro.dtos.UserDTO;
 import jw.com.br.EasyAgro.dtos.UserUpdateDTO;
 import jw.com.br.EasyAgro.repositories.OrderRepository;
+import jw.com.br.EasyAgro.serversocket.Cliente;
 import jw.com.br.EasyAgro.services.PixPaymentService;
 import jw.com.br.EasyAgro.services.TaskService;
 import jw.com.br.EasyAgro.services.UserService;
@@ -25,11 +26,13 @@ import org.springframework.security.web.PortResolverImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.desktop.OpenFilesEvent;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
+
 public class UserController {
     @Autowired
     private UserService userService;
@@ -40,6 +43,9 @@ public class UserController {
 
     @Autowired
     private PixPaymentService pixPaymentService;
+
+    @Autowired
+    private Cliente clienteService;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllProducts(){
@@ -63,13 +69,23 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity deleteById(@PathVariable ObjectId id){
         userService.deleteUser(id);
-        // http 204
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/create")
-    public ResponseEntity<User> createProduct(@RequestBody @Valid UserDTO payload) {
-        return new ResponseEntity<User>(userService.createUser(payload), HttpStatus.OK);
+    public ResponseEntity<?> createProduct(@RequestBody @Valid UserDTO payload) {
+        try {
+            boolean resultado = clienteService.iniciarCliente(payload.cpf());
+            if (resultado) {
+                User createdUser = userService.createUser(payload);
+                return new ResponseEntity<>(createdUser, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("CPF is invalid. User creation rejected.", HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception err) {
+            System.out.println(err.getMessage());
+            return new ResponseEntity<>("Error processing the request.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/myTasks/{userId}")
