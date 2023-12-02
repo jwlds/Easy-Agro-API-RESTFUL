@@ -13,6 +13,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -218,6 +219,14 @@ public class UserService {
                     .anyMatch(favorites -> favorites.get_id().equals(productId));
            return new FavoriteResponseDTO(result);
 
+    }
+
+
+    // check
+    public boolean isUserExistsByCpfAndEmail(String cpf, String login) {
+        Optional<User> userByCpf = userRepository.findUserByCpf(cpf);
+        UserDetails userByEmail = userRepository.findUserByLogin(login);
+        return userByCpf.isPresent() && userByEmail != null;
     }
 
 

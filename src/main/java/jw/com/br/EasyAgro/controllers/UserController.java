@@ -72,19 +72,32 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<?> createProduct(@RequestBody @Valid UserDTO payload) {
         try {
-            boolean resultado = clienteService.iniciarCliente(payload.cpf());
-            if (resultado) {
-                System.out.println(payload.address());
-                User createdUser = userService.createUser(payload);
-                return new ResponseEntity<>(createdUser, HttpStatus.OK);
+            boolean isCpfValid = clienteService.iniciarCliente(payload.cpf());
+            if (isCpfValid) {
+                if (!userService.isUserExistsByCpfAndEmail(payload.cpf(), payload.login())) {
+                    System.out.println(payload.address());
+                    User createdUser = userService.createUser(payload);
+                    return new ResponseEntity<>(createdUser, HttpStatus.OK);
+                } else {
+                    System.out.println("cpf ja ");
+                    return ResponseEntity
+                            .status(HttpStatus.BAD_REQUEST)
+                            .body("User with the given CPF and e-mail already exists.");
+                }
             } else {
-                return new ResponseEntity<>("CPF is invalid. User creation rejected.", HttpStatus.BAD_REQUEST);
+                System.out.println("cpf ja 2");
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body("Invalid CPF. User creation rejected.");
             }
         } catch (Exception err) {
             System.out.println(err.getMessage());
-            return new ResponseEntity<>("Error processing the request.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error processing the request.");
         }
     }
+
 
     @GetMapping("/myTasks/{userId}")
     public ResponseEntity<List<Task>> getMyTasks(@PathVariable String userId) {
