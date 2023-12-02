@@ -8,10 +8,7 @@ import jw.com.br.EasyAgro.domain.user.my.Cart;
 import jw.com.br.EasyAgro.domain.user.my.Favorites;
 import jw.com.br.EasyAgro.domain.user.my.MyProducts;
 import jw.com.br.EasyAgro.domain.user.my.Task;
-import jw.com.br.EasyAgro.dtos.FavoriteResponseDTO;
-import jw.com.br.EasyAgro.dtos.ItemUserDTO;
-import jw.com.br.EasyAgro.dtos.UserDTO;
-import jw.com.br.EasyAgro.dtos.UserUpdateDTO;
+import jw.com.br.EasyAgro.dtos.*;
 import jw.com.br.EasyAgro.repositories.OrderRepository;
 import jw.com.br.EasyAgro.serversocket.Cliente;
 import jw.com.br.EasyAgro.services.PixPaymentService;
@@ -77,6 +74,7 @@ public class UserController {
         try {
             boolean resultado = clienteService.iniciarCliente(payload.cpf());
             if (resultado) {
+                System.out.println(payload.address());
                 User createdUser = userService.createUser(payload);
                 return new ResponseEntity<>(createdUser, HttpStatus.OK);
             } else {

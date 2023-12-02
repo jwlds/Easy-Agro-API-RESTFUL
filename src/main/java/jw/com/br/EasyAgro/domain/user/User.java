@@ -35,6 +35,7 @@ public class User implements UserDetails {
     private String password;
     private String phoneNumber;
     private String name;
+    private Address address;
 
     public User(UserDTO user) {
         this.nickname = user.nickname();
@@ -48,6 +49,7 @@ public class User implements UserDetails {
         this.myShopping = new ArrayList<>();
         this.myFavorites = new ArrayList<>();
         this.myTask = new ArrayList<>();
+        this.address = user.address();
     }
 
     @Override

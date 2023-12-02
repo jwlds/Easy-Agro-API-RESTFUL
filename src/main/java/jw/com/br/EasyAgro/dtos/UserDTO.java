@@ -1,5 +1,6 @@
 package jw.com.br.EasyAgro.dtos;
 
+import jw.com.br.EasyAgro.domain.user.my.Address;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,5 +11,6 @@ public record UserDTO(
          String login,
          String password,
          String phoneNumber,
-         String cpf) {
+         String cpf,
+        Address address) {
 }

@@ -17,9 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-
-
-
 public class  Product {
     @Id
     private String id;
@@ -47,8 +44,6 @@ public class  Product {
         this.createdAt = createdAt;
         this.reviewIds = reviewIds;
         this.userId = payload.userId();
+        this.images = payload.images();
     }
-
-
 }
-
