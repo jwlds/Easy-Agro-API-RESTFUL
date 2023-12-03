@@ -8,4 +8,6 @@ import lombok.Setter;
 public class Deficiencia {
     private String nome;
     private String sintomas;
+    private String imagem;
+
 }

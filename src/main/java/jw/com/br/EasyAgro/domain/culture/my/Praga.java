@@ -13,4 +13,5 @@ public class Praga {
     private String disseminacao;
     private String condicoesFavoraveis;
     private String controle;
+    private String imagem;
 }
