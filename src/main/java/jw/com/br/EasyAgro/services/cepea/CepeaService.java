@@ -73,7 +73,6 @@ public class CepeaService {
     @Scheduled(fixedRate = 24 * 60 * 60 * 1000)
     public void scheduledTask() {
         deleteAllAndSaveNewData();
-        //saveDataToMongoDB();
     }
 
     public Optional<CepeaProducts> allProducts(){
