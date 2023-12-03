@@ -19,12 +19,13 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 public class CepeaService {
 
-    private String apiToken = "1I708CsPm6u4jG6IZyzPjFveE8LHIRkRimhWkHIG";
+    private String apiToken = "JAXjw_bNZkBX1rX3uM969uC97TnBKNGc7qKBEHyA";
 
     @Autowired
     private CepeaApiRepository cepeaApiRepository;
@@ -62,18 +63,23 @@ public class CepeaService {
             return null;
         }
     }
-    public void saveDataToMongoDB() {
+
+    public void deleteAllAndSaveNewData() {
+        cepeaApiRepository.deleteAll();
         List<ProductCepeaDTO> productList = fetchDataProducts();
-        cepeaApiRepository.save(new CepeaProducts(Instant.now(),productList));
+        cepeaApiRepository.save(new CepeaProducts(Instant.now(), productList));
     }
 
-//    @Scheduled(fixedRate = 24 * 60 * 60 * 1000)
-//    public void scheduledTask() {
-//        saveDataToMongoDB();
-//    }
+    @Scheduled(fixedRate = 24 * 60 * 60 * 1000)
+    public void scheduledTask() {
+        deleteAllAndSaveNewData();
+        //saveDataToMongoDB();
+    }
 
-    public List<CepeaProducts> allProducts(){
-        return cepeaApiRepository.findAll();
+    public Optional<CepeaProducts> allProducts(){
+        return cepeaApiRepository.findAll()
+                .stream()
+                .findFirst();
     }
 
 

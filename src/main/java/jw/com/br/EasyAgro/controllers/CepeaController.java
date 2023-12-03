@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cepea")
@@ -18,10 +19,9 @@ public class CepeaController {
     @Autowired
     private  CepeaService apiService;
 
-
     @GetMapping("/products")
-    public ResponseEntity<List<CepeaProducts>> getAllProductsCepea(){
-        return new ResponseEntity<List<CepeaProducts>>(apiService.allProducts(), HttpStatus.OK);
+    public ResponseEntity<Optional<CepeaProducts>> getAllProductsCepea(){
+        return new ResponseEntity<Optional<CepeaProducts>>(apiService.allProducts(), HttpStatus.OK);
     }
 
 }
