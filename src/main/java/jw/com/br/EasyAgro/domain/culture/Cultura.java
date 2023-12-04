@@ -19,12 +19,14 @@ public class Cultura {
     @Id
     private String _id;
     private String nome;
+    private String imagem;
     private List<Doenca> doencas;
     private List<Praga> pragas;
     private List<Deficiencia> deficiencias;
 
     public Cultura(CulturaDTO data) {
         this.nome = data.nome();
+        this.imagem = data.imagem();
         this.doencas = data.doencas();
         this.pragas = data.pragas();
         this.deficiencias = data.deficiencias();

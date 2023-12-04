@@ -11,6 +11,7 @@ public record UserDTO(
          String login,
          String password,
          String phoneNumber,
+         String imagem,
          String cpf,
         Address address) {
 }

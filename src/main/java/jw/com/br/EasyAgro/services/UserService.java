@@ -82,8 +82,9 @@ public class UserService {
         Query query = new Query(Criteria.where("_id").is(objectId));
         Update update = new Update()
                 .set("name", dataUpdate.name())
-                .set("phoneNumber", dataUpdate.phoneNumber())
                 .set("nickname", dataUpdate.nickname())
+                .set("phoneNumber", dataUpdate.phoneNumber())
+                .set("imagem", dataUpdate.imagem())
                 .set("cpf", dataUpdate.cpf());
 
         FindAndModifyOptions options = FindAndModifyOptions.options().returnNew(true);

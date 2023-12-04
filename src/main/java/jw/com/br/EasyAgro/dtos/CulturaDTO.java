@@ -8,6 +8,7 @@ import java.util.List;
 
 public record CulturaDTO(
         String nome,
+        String imagem,
         List<Doenca> doencas,
         List<Praga> pragas,
         List<Deficiencia> deficiencias

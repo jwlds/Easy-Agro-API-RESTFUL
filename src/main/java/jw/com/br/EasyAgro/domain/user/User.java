@@ -34,6 +34,7 @@ public class User implements UserDetails {
     private String cpf;
     private String password;
     private String phoneNumber;
+    private String imagem;
     private String name;
     private Address address;
 
@@ -42,6 +43,7 @@ public class User implements UserDetails {
         this.login = user.login();
         this.password = user.password();
         this.phoneNumber = user.phoneNumber();
+        this.imagem = user.imagem();
         this.cpf = user.cpf();
         this.name = user.name();
         this.myCart = new ArrayList<>();
