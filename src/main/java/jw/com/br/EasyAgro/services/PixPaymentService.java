@@ -76,8 +76,11 @@ public class PixPaymentService {
                     createdPayment.getStatus(),
                     pixPaymentDTO.getOrders(),
                     String.valueOf(createdPayment.getId()),
-                    pixPaymentDTO.getBuyerId());
+                    pixPaymentDTO.getBuyerId(),
+                    createdPayment.getPointOfInteraction().getTransactionData().getQrCode());
             orderRepository.insert(order);
+
+
 
             return new PixPaymentResponseDTO(
                     createdPayment.getId(),

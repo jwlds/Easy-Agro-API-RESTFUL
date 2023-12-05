@@ -23,13 +23,20 @@ public class Order {
     private BigDecimal totalPrice;
     private Instant createdAt;
     private String status;
+    private String pix;
     private List<OrderProduct> products;
 
-    public Order(BigDecimal totalPrice,String status,List<OrderProduct> products, String transitionId, String userId){
+    public Order(BigDecimal totalPrice,
+                 String status,
+                 List<OrderProduct> products,
+                 String transitionId,
+                 String userId,
+                 String pix){
         this.products = products;
         this.totalPrice = totalPrice;
         this.status = status;
         this.transitionId = transitionId;
+        this.pix = pix;
         this.createdAt = Instant.now();
         this.buyerId = userId;
     }
