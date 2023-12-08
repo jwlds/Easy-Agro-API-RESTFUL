@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 @Service
 public class PixPaymentService {
     //@Value("${mercado_pago_sample_access_token}")
-    private String mercadoPagoAccessToken = "APP_USR-474140450138612-112019-09ae90f0cc7758aaa68ce5bfd375e4b1-130665105";
+    private String mercadoPagoAccessToken = "your key";
 
     @Autowired
     private OrderRepository orderRepository;

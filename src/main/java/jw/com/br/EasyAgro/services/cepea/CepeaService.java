@@ -25,7 +25,7 @@ import java.util.Optional;
 @Service
 public class CepeaService {
 
-    private String apiToken = "JAXjw_bNZkBX1rX3uM969uC97TnBKNGc7qKBEHyA";
+    private String apiToken = "your key";
 
     @Autowired
     private CepeaApiRepository cepeaApiRepository;
